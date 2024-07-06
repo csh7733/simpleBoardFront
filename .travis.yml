@@ -6,19 +6,16 @@ branches:
   only:
     - master
 
-cache:
-  directories:
-    - node_modules
-
 script:
-  - npm install > build_log.txt 2>&1
-  - npm run build >> build_log.txt 2>&1
+  - npm install
+  - npm run build
 
 before_deploy:
+  - cd build
   - zip -r first-project-react *
-  - mkdir -p deploy
-  - mv first-project-react.zip deploy/first-project-react.zip
-  - zip build_log.zip build_log.txt
+  - mkdir -p ../deploy
+  - mv first-project-react.zip ../deploy/first-project-react.zip
+  - cd ..
 
 deploy:
   - provider: s3
