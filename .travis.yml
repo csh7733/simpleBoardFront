@@ -14,6 +14,22 @@ script:
 - npm install
 - npm run build
 
+before_deploy:
+  - zip -r first-project-react * 
+  - mkdir -p deploy
+  - mv first-project-react.zip deploy/first-project-react.zip
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY 
+    bucket: first-project-react
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: private  
+    local_dir: deploy 
+    wait-until-deployed: true
+
 notifications:
   email:
     recipients:
