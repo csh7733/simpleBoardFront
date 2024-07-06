@@ -17,7 +17,8 @@ before_deploy:
   - cp scripts/*.sh before-deploy/
   - cd before-deploy
   - zip -r first-project-react *
-  - mv first-project-react.zip ../deploy/first-project-react.zip
+  - cd ../ && mkdir -p deploy 
+  - mv first-project-react.zip deploy/first-project-react.zip
   - cd ..
 
 deploy:
