@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Container, AppBar, Toolbar, Typography, Paper, Grid } from '@mui/material';
 import axios from 'axios';
-import PostList from './components/PostList';
-import PostForm from './components/PostForm';
+import PostList from './components/PostList.js';
+import PostForm from './components/PostForm.js';
 
 const App = () => {
   const [posts, setPosts] = useState([]);
