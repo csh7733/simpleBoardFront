@@ -11,10 +11,10 @@ TIMESTAMP=$(date +%s)
 sudo mkdir -p $DEPLOY_DIR
 
 # 빌드 파일을 새로운 배포 디렉토리로 복사
-cp -r $BUILD_DIR/* $DEPLOY_DIR/
+sudo cp -r $BUILD_DIR/* $DEPLOY_DIR/
 
 # 심볼릭 링크 업데이트
-ln -sfn $DEPLOY_DIR $DEPLOY_DIR_FINAL
+sudo ln -sfn $DEPLOY_DIR $DEPLOY_DIR_FINAL
 
 # Nginx 재시작
 sudo systemctl reload nginx
