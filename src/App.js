@@ -52,7 +52,7 @@ const App = () => {
     <Container>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6">Post Dashboard</Typography>
+          <Typography variant="h6">Post Dashboard Ver 2</Typography>
         </Toolbar>
       </AppBar>
       <Grid container spacing={3} style={{ marginTop: '20px' }}>
