@@ -10,3 +10,5 @@ sudo rm -rf $DEPLOY_DIR/*
 
 echo "> 빌드된 파일 Nginx 디렉토리로 복사"
 sudo cp -r $BUILD_DIR/* $DEPLOY_DIR/
+
+sudo systemctl restart nginx
