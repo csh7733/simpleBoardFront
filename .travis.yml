@@ -11,37 +11,35 @@ cache:
     - node_modules
 
 script:
-- npm install
-- npm run build
+  - npm install > build_log.txt 2>&1
+  - npm run build >> build_log.txt 2>&1
 
 before_deploy:
-  - zip -r first-project-react * 
+  - zip -r first-project-react *
   - mkdir -p deploy
   - mv first-project-react.zip deploy/first-project-react.zip
+  - zip build_log.zip build_log.txt
 
 deploy:
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: $AWS_SECRET_KEY 
+    secret_access_key: $AWS_SECRET_KEY
     bucket: first-project-react-build
     region: ap-northeast-2
     skip_cleanup: true
-    acl: private  
-    local_dir: deploy 
+    acl: private
+    local_dir: deploy
     wait-until-deployed: true
 
   - provider: codedeploy
-    access_key_id: $AWS_ACCESS_KEY  
-    secret_access_key: $AWS_SECRET_KEY 
-
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
     bucket: first-project-react-build
-    key: first-project-react.zip  
+    key: first-project-react.zip
     bundle_type: zip
-
     application: first-project-react
-    deployment_group: first-project-react-group 
-
-    region: ap-northeast-2  
+    deployment_group: first-project-react-group
+    region: ap-northeast-2
     wait-until-deployed: true
 
 notifications:
