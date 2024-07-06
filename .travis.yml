@@ -12,7 +12,7 @@ script:
 
 before_deploy:
   - mkdir -p before-deploy
-  - cp -r build/* before-deploy/
+  - cp -r build/* before-deploy/build/
   - cp appspec.yml before-deploy/
   - cp scripts/*.sh before-deploy/
   - cd before-deploy
