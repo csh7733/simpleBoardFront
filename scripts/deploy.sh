@@ -2,13 +2,19 @@
 
 REPOSITORY=home/ec2-user/front/zip
 BUILD_DIR=$REPOSITORY/build
-DEPLOY_DIR=/var/www/html
+DEPLOY_DIR_FINAL=/var/www/html
+DEPLOY_DIR=/var/www/releases/$TIMESTAMP
 echo "> 새 프론트엔드 애플리케이션 빌드 및 배포"
 
-echo "> 기존 파일 삭제"
-sudo rm -rf $DEPLOY_DIR/*
+# 새로운 배포 디렉토리 생성
+TIMESTAMP=$(date +%s)
+sudo mkdir -p $DEPLOY_DIR
 
-echo "> 빌드된 파일 Nginx 디렉토리로 복사"
-sudo cp -r $BUILD_DIR/* $DEPLOY_DIR/
+# 빌드 파일을 새로운 배포 디렉토리로 복사
+cp -r $BUILD_DIR/* $DEPLOY_DIR/
 
-sudo systemctl restart nginx
+# 심볼릭 링크 업데이트
+ln -sfn $DEPLOY_DIR $DEPLOY_DIR_FINAL
+
+# Nginx 재시작
+sudo systemctl reload nginx
